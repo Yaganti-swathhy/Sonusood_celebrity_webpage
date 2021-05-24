@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>celebrity_page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style type="text/css">
+  body {
+    font-family:georgia;
+    background-color: #040404;
+    color: white;
+    position: relative;
+    background: transparent;
+    margin-left: 40px;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    background: #040404 url("./sonu_bio_bg.jpg") top right no-repeat;
+    background-size: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    z-index: -1;
+  }
+
+
+  @media (min-width: 1024px) {
+    body::before {
+      background-attachment: fixed;
+    }
+  }
+
+  a {
+    color: #ffcc00;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #35e888;
+    text-decoration: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family:copperplate,fantasy;
+  }
+
+    .about-me .content h3 {
+      font-weight: 700;
+      font-size: 26px;
+      color: #18d26e;
+    }
+
+    .about-me .content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .about-me .content ul li {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .about-me .content ul strong {
+      margin-right: 10px;
+    }
+
+    .about-me .content ul i {
+      font-size: 16px;
+      margin-right: 5px;
+      color: #18d26e;
+      line-height: 0;
+    }
+
+    .about-me .content p:last-child {
+      margin-bottom: 0;
+    }
+    .counts {
+      padding: 70px 0 60px;
+    }
+
+    .counts .count-box {
+      padding: 30px 30px 25px 30px;
+      width: 100%;
+      position: relative;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .counts .count-box i {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      color: #18d26e;
+      border-radius: 50px;
+      line-height: 0;
+    }
+
+    .counts .count-box span {
+      font-size: 36px;
+      display: block;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .counts .count-box p {
+      padding: 0;
+      margin: 0;
+      font-family: "Raleway", sans-serif;
+      font-size: 14px;
+    }
+    /*--------------------------------------------------------------
+    # Header
+    --------------------------------------------------------------*/
+    #header {
+      transition: ease-in-out 0.3s;
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      z-index: 997;
+      overflow-y: auto;
+    }
+
+    #header * {
+      transition: ease-in-out 0.3s;
+    }
+
+    #header h1 {
+      font-size: 48px;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      font-weight: 700;
+      font-family: "Poppins", sans-serif;
+    }
+
+    #header h1 a, #header h1 a:hover {
+      color: #fff;
+      line-height: 1;
+      display: inline-block;
+    }
+
+    #header h2 {
+      font-size: 24px;
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    #header h2 span {
+      color: #fff;
+      border-bottom: 2px solid #18d26e;
+      padding-bottom: 6px;
+    }
+
+    #header img {
+      padding: 0;
+      margin: 0;
+    }
+
+    #header .social-links {
+      margin-top: 40px;
+      display: flex;
+    }
+
+    #header .social-links a {
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      color: black;
+      line-height: 1;
+      margin-right: 8px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    #header .social-links a:hover {
+      background: #18d26e;
+    }
+
+    @media (max-width: 992px) {
+      #header h1 {
+        font-size: 36px;
+      }
+      #header h2 {
+        font-size: 20px;
+        line-height: 30px;
+      }
+      #header .social-links {
+        margin-top: 15px;
+      }
+      #header .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Header Top */
+    #header.header-top {
+      height: 80px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    #header.header-top .social-links, #header.header-top h2 {
+      display: none;
+    }
+
+    #header.header-top h1 {
+      margin-right: auto;
+      font-size: 36px;
+    }
+
+    #header.header-top .container {
+      display: flex;
+      align-items: center;
+    }
+
+    #header.header-top .navbar {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      #header.header-top {
+        height: 60px;
+      }
+      #header.header-top h1 {
+        font-size: 26px;
+      }
+    }
+
+    /*--------------------------------------------------------------
+    # Navigation Menu
+    --------------------------------------------------------------*/
+    /**
+    * Desktop Navigation
+    */
+    .navbar {
+      padding: 0;
+      margin-top: 35px;
+    }
+
+    .navbar ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      list-style: none;
+      align-items: center;
+    }
+
+    .navbar li {
+      position: relative;
+    }
+
+    .navbar li + li {
+      margin-left: 30px;
+    }
+
+    .navbar a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.7);
+      white-space: nowrap;
+      transition: 0.3s;
+    }
+
+    .navbar a i {
+      font-size: 12px;
+      line-height: 0;
+      margin-left: 5px;
+    }
+
+    .navbar a:before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #18d26e;
+      visibility: hidden;
+      width: 0px;
+      transition: all 0.3s ease-in-out 0s;
+    }
+
+    .navbar a:hover:before, .navbar li:hover > a:before, .navbar .active:before {
+      visibility: visible;
+      width: 25px;
+    }
+
+    .navbar a:hover, .navbar .active, .navbar li:hover > a {
+      color: #fff;
+    }
+
+    /**
+    * Mobile Navigation
+    */
+    .mobile-nav-toggle {
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      display: none;
+      line-height: 0;
+      transition: 0.5s;
+      position: fixed;
+      right: 15px;
+      top: 15px;
+    }
+
+    @media (max-width: 991px) {
+      .mobile-nav-toggle {
+        display: block;
+      }
+      .navbar ul {
+        display: none;
+      }
+    }
+
+    .navbar-mobile {
+      position: fixed;
+      overflow: hidden;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      transition: 0.3s;
+      z-index: 999;
+      margin-top: 0;
+    }
+
+    .navbar-mobile .mobile-nav-toggle {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+
+    .navbar-mobile ul {
+      display: block;
+      position: absolute;
+      top: 55px;
+      right: 15px;
+      bottom: 45px;
+      left: 15px;
+      padding: 10px 0;
+      overflow-y: auto;
+      transition: 0.3s;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .navbar-mobile li {
+      padding: 12px 20px;
+    }
+
+    .navbar-mobile li + li {
+      margin: 0;
+    }
+
+    .navbar-mobile a {
+      font-size: 16px;
+      position: relative;
+    }
+    .section-title h2::after {
+    content: "";
+    width: 120px;
+    height: 1px;
+    display: inline-block;
+    background: #4ceb95;
+    margin: 4px 10px;
+    }
+    bootstrap.css:37*, ::after, ::before {
+    box-sizing: border-box;
+    }
+.col-lg-8 {
+      width: 60%;
+      float:right;
+      position: relative;
+ }
+ .col-lg-4 {
+       width: 33%;
+       float: left;
+       position: relative;
+  }
+  .col-lg-7{
+        width: 50%;
+        float:right;
+        position: relative;
+   }
+   .col-lg-6{
+         width: 50%;
+         float:left;
+         position: relative;
+    }
+    .extra{
+    				background-color:  black;
+            opacity: 0.75;
+    			    text-align:center;
+    			    padding:3px;
+    			    font-family:cambria;
+    			    color:white;
+    			    font-size:17px;
+    				margin-top:105px;
+    				transition: all 0.4s ease 0s;
+
+    			}
+  </style>
+
+</head>
+
+
+<header>
+  <div class="container">
+
+    <h1><a href="sonusood.html">SONU SOOD</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link" href="./sonusood.html">Home</a></li>
+        <li><a class="nav-link active" href="./sonu_bio.html">Bio</a></li>
+        <li><a class="nav-link" href="./latestnews.html">Latest News</a></li>
+        <li><a class="nav-link" href="https://soodcharityfoundation.org">Charity</a></li>
+        <li><a class="nav-link" href="./sonu_contact.html">Contact</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
+<section id="about" class="about">
+
+  <div class="about-me container">
+
+    <div class="section-title">
+      <h2>BIOGRAPHY</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4" data-aos="fade-right">
+        <img src="sonu_5.jpg" width= 540px height= 780px class="img-fluid" alt="">
+      </div>
+      <div class="col-lg-8" data-aos="fade-left">
+        <h1>Indian actor, producer, model and philanthropist</h1>
+        <p class="fst-italic">
+        Sonu Sood is an Indian actor, producer, model and philanthropist who works predominantly in Hindi, Telugu, and Tamil films.
+        </p>
+        <div class="row">
+          <div class="col-lg-9">
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <strong>Birthday :</strong> <span>30 July 1973</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Birth place :</strong> <span>Moga, Punjab, India.</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Education :</strong> <span>	Yeshwantrao Chavan College of Engineering, Nagpur (B.E.)</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Spouse :</strong> <span>Sonali Sood (m. 1996)</span></li>
+            </ul>
+          </div>
+          <div class="col-lg-9">
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <strong>Age :</strong> <span>47</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>children :</strong> <span>2</span></li>
+              <li><i class="bi bi-chevron-right"></i> <strong>Years active :</strong> <span>1999-present</span></li>
+
+            </ul>
+          </div>
+        </div>
+
+        <p>
+        In 1999, Sood was introduced to Tamil language films with Kallazhagar and Nenjinile. He then appeared as an antagonist in the Telugu film Hands Up! in 2000. In 2001, he appeared in Majunu. He then began starring in Hindi films, with Shaheed-E-Azam, as Bhagat Singh in 2002. Sood earned recognition as Abhishek Bachchan's brother in Mani Ratnam's Yuva in 2004 and in Aashiq Banaya Aapne in 2005.
+      </p><br>
+
+      <p>
+        In Tollywood, with the release of Super in 2005, he received greater recognition for his work. In this film, his co-star was Nagarjuna as a high-tech thief. His next film was Athadu. In 2006, he again portrayed the antagonist in Ashok. It was an average grosser, but by now he had become popular in Telugu films.
+      </p>
+      <br>
+
+      <p>
+        In 2009, he played the role of Pasupathy in Arundhati. Following the Tollywood release of Arundhati, he played the role of Rajkumar Sujamal in the Indian epic film Jodha Akbar, directed by Ashutosh Gowariker. In 2009, he played the role of gangster Bada in Anjaneyulu opposite Ravi Teja. In the latter half of 2009, he acted in another Telugu film Ek Niranjan, in which he again played the antagonist. In 2010, he played the lead antagonist in Abhinav Kashyap's Dabangg, co-starring with Salman Khan. His Kannada debut with Sudeep, Vishnuvardhana (2011), released to positive reviews of his performance. He was appointed "the state icon of Punjab" by the state election commission.
+      </p>
+      <br>
+
+      <p>
+      Sood married Sonali, a Telugu woman in 1996. They have two sons.
+    </p>
+
+
+      </div>
+
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <h2>Some of the movies he acted in : </h1>
+      <div class="col-lg-6">
+        <ul>
+          <li><p>1999	Kallazhagar</p>
+            <p>2000	Hands Up! </p>
+            <p>2001	Majunu</p>
+            <p>2002	Shaheed-E-Azam</p>
+            <p>2003 Ammayilu Abbayilu</p>
+            <p>2005 Athadu</p>
+            <p>2006 Ashok</p>
+            <p>2008 Jodha Akbar</p>
+            <p>2009 Arundhati</p></li>
+        </ul>
+      </div>
+
+        <div class="col-lg-7">
+          <ul>
+            <li>  <p>2010 Dabaang</p>
+              <p>2011 Dookudu</p>
+              <p>2012 Julai</p>
+              <p>2013 Ramaiya Vastavaiya</p>
+              <p>2014 Aagadu</p>
+              <p>2016 Abhinetri</p>
+              <p>2018 Paltan</p>
+              <p>2019 Abhinetri 2</p>
+              <p>2021 Alludu Adhurs</p></li>
+          </ul>
+        </div>
+        <br><br>
+
+        <h1>Sood Charity Foundation</h1>
+        <p>He founded Sood Charity Foundation to help people of all stature.</p>
+
+        <h1>Social work during the COVID-19 pandemic</h1>
+        <p>In May 2020, during the nationwide lockdown due to the COVID-19 pandemic, Sood helped thousands of stranded Indian migrant workers
+           to reach their homes by arranging buses, special trains and chartered flights for them. In July 2020 he arranged a chartered
+           flight to bring home over 1,500 Indian students stranded in Kyrgyzstan, flying them from Bishkek to Varanasi. His charity during
+           the pandemic was lauded, and he was hailed as a real-life hero in India.</p>
+
+         </p>On 25 July 2020, a video of a farmer's daughters ploughing a field, like bulls with a yoke on their shoulders,
+went viral over social media. Sood quickly sent the family a tractor. On 5 August 2020, he helped 101 medical
+students, predominantly from Tamil Nadu, who were stranded in Moscow during the lockdown, reach Chennai safely
+on a chartered flight arranged by him after they contacted his team for help. On his birthday he launched a website
+and app called Pravasi Rojgar to help migrant workers find suitable jobs amid the pandemic. On 19 February 2021, Sood
+launched an initiative 'Ilaaj India' platform to provide healthcare services for needy people.</p>
+
+  <p>On 17 April 2021, Sonu Sood tested positive for Coronavirus disease. He also shared a message for his fans in his post that read:
+"Covid - positive. Mood and spirit - super positive. Hi everyone, this is to inform you that I have tested positive this morning for COVID-19.
+As a part of precautions, I have already quarantined myself and taking utmost care. But don't worry this gives me ample time to solve your problems.
+Remember I am always there for you all."</p>
+
+<p>In 2021, Sood provided much-needed oxygen plants and cylinders for COVID-19 patients in India.
+</p>
+  </div>
+
+  <div class="extra">
+				<p>Copyright &#169; SONU SOOD 2021. All Rights Reserved</p>
+			</div>
+      </html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>celebrity_page</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style type="text/css">
+  body {
+    font-family:georgia;
+    background-color: #040404;
+    color: white;
+    position: relative;
+    background: transparent;
+    margin-left: -220px;
+
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    background: #040404 url("./sonu_bio_bg.jpg") top right no-repeat;
+
+    background-size: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    z-index: -1;
+  }
+
+
+  @media (min-width: 1024px) {
+    body::before {
+      background-attachment: fixed;
+    }
+  }
+
+  a {
+    color: #ffcc00;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #35e888;
+    text-decoration: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: copperplate,fantasy;
+    font-size: 32px;
+
+  }
+  #header {
+    transition: ease-in-out 0.3s;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    z-index: 997;
+    overflow-y: auto;
+  }
+
+  #header * {
+    transition: ease-in-out 0.3s;
+  }
+
+  #header h1 {
+    font-size: 40px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+  }
+
+  #header h1 a, #header h1 a:hover {
+    color: #fff;
+    line-height: 1;
+    display: inline-block;
+  }
+
+  #header h2 {
+    font-size: 24px;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  #header h2 span {
+    color: #fff;
+    border-bottom: 2px solid #18d26e;
+    padding-bottom: 6px;
+  }
+
+  #header img {
+    padding: 0;
+    margin: 0;
+  }
+
+  #header .social-links {
+    margin-top: 40px;
+    display: flex;
+  }
+
+  #header .social-links a {
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    color: black;
+    line-height: 1;
+    margin-right: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+
+  #header .social-links a:hover {
+    background: #18d26e;
+  }
+
+  @media (max-width: 992px) {
+    #header h1 {
+      font-size: 36px;
+    }
+    #header h2 {
+      font-size: 20px;
+      line-height: 30px;
+    }
+    #header .social-links {
+      margin-top: 15px;
+    }
+    #header .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  /* Header Top */
+  #header.header-top {
+    height: 80px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  #header.header-top .social-links, #header.header-top h2 {
+    display: none;
+  }
+
+  #header.header-top h1 {
+    margin-right: auto;
+    font-size: 36px;
+  }
+
+  #header.header-top .container {
+    display: flex;
+    align-items: center;
+  }
+
+  #header.header-top .navbar {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    #header.header-top {
+      height: 60px;
+    }
+    #header.header-top h1 {
+      font-size: 26px;
+    }
+  }
+
+  /*--------------------------------------------------------------
+  # Navigation Menu
+  --------------------------------------------------------------*/
+  /**
+  * Desktop Navigation
+  */
+  .navbar {
+    padding: 0;
+    margin-top: 31px;
+    margin-left: -1px;
+  }
+
+  .navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+
+  .navbar li {
+    position: relative;
+  }
+
+  .navbar li + li {
+    margin-left: 30px;
+  }
+
+  .navbar a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    transition: 0.3s;
+  }
+
+  .navbar a i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+  }
+
+  .navbar a:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #18d26e;
+    visibility: hidden;
+    width: 0px;
+    transition: all 0.3s ease-in-out 0s;
+  }
+
+  .navbar a:hover:before, .navbar li:hover > a:before, .navbar .active:before {
+    visibility: visible;
+    width: 25px;
+  }
+
+  .navbar a:hover, .navbar .active, .navbar li:hover > a {
+    color: #fff;
+  }
+
+  /**
+  * Mobile Navigation
+  */
+  .mobile-nav-toggle {
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    display: none;
+    line-height: 0;
+    transition: 0.5s;
+    position: fixed;
+    right: 15px;
+    top: 15px;
+  }
+
+  @media (max-width: 991px) {
+    .mobile-nav-toggle {
+      display: block;
+    }
+    .navbar ul {
+      display: none;
+    }
+  }
+
+  .navbar-mobile {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    transition: 0.3s;
+    z-index: 999;
+    margin-top: 0;
+  }
+
+  .navbar-mobile .mobile-nav-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  .navbar-mobile ul {
+    display: block;
+    position: absolute;
+    top: 55px;
+    right: 15px;
+    bottom: 45px;
+    left: 15px;
+    padding: 10px 0;
+    overflow-y: auto;
+    transition: 0.3s;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .navbar-mobile li {
+    padding: 12px 20px;
+  }
+
+  .navbar-mobile li + li {
+    margin: 0;
+  }
+
+  .navbar-mobile a {
+    font-size: 16px;
+    position: relative;
+  }
+  .section-title h2::after {
+  content: "";
+  width: 120px;
+  height: 1px;
+  display: inline-block;
+  background: #4ceb95;
+  margin: 4px 10px;
+  }
+  bootstrap.css:37*, ::after, ::before {
+  box-sizing: border-box;
+  }
+
+  .extra{
+    				background-color:  black;
+            opacity: 0.75;
+    			    text-align:center;
+    			    padding:3px;
+    			    font-family:cambria;
+    			    color:white;
+    			    font-size:17px;
+              margin-top:105px;
+              margin-left: 200px;
+    				transition: all 0.4s ease 0s;
+
+    			}
+
+  .recentNews {
+    background: #040404 url("./sonu_3.jpg") top right no-repeat ;
+    margin-left: 200px;
+
+}
+.recentNews .news-title {
+    text-align:center;
+    padding-top:30px;
+    padding-bottom:30px;
+    font-family: copperplate,fantasy;
+    font-size:55px;
+    font-weight:bold;
+    color: white;
+}
+.recentNews .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.recentNews .ct-blog {
+    margin-bottom: 30px;
+}
+.ct-blog .inner {
+    background-color: #FFF;
+    padding: 10px;
+    transition: all 0.2s ease-in-out 0s;
+    cursor: pointer;
+    height: 100%;
+}
+.ct-blog .inner:hover {
+    background-color: #e6e6e6;
+}
+.ct-blog .fauxcrop {
+    height: 180px;
+    overflow: hidden;
+}
+.ct-blog .fauxcrop img {
+    width: 100%;
+}
+.ct-blog-content {
+    display: table;
+    padding: 30px 0 28px;
+}
+.ct-blog-content .ct-blog-date {
+    border-right: 1px solid #95A5A6;
+    display: table-cell;
+    font-family: "Lato", sans-serif;
+    padding: 0px 18px 0px 15px;
+    text-align: center;
+}
+.ct-blog-content .ct-blog-date span {
+    font-size: 16px;
+    color: rgb(20, 117, 175);
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+}
+.ct-blog-content .ct-blog-date strong {
+    font-size: 25px;
+    color: rgb(20, 117, 175);
+}
+.ct-blog-content .ct-blog-header {
+    color: #000;
+    display: table-cell;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    line-height: 1.1;
+    padding: 0 20px;
+    vertical-align: top;
+}
+.btn-news {
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.btn-news.btn-contests a {
+    color: #fff;
+    font-family: 'nimbus-sans-condensed', sans-serif;
+    font-size: 24px;
+    transition: all 0.2s ease-in-out 0s;
+}
+.btn-news.btn-contests a:hover {
+    color: #000;
+}
+
+  </style>
+
+</head>
+
+<header>
+  <div class="container">
+
+    <h1><a href="sonusood.html"><b>SONU SOOD</b></a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link" href="./sonusood.html">Home</a></li>
+        <li><a class="nav-link" href="./sonu_bio.html">Bio</a></li>
+        <li><a class="nav-link active" href="./latestnews.html">Latest News</a></li>
+        <li><a class="nav-link" href="https://soodcharityfoundation.org">Charity</a></li>
+        <li><a class="nav-link" href="./sonu_contact.html">Contact</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
+
+<section class="recentNews">
+  <div class="container">
+    <h2 class="news-title">Latest News</h2>
+    <div class="row">
+      <div class="ct-blog col-sm-6 col-md-4">
+        <div class="inner">
+          <div class="fauxcrop">
+            <a href="#"><img alt="News Entry" src="news_1.jpg"></a>
+          </div>
+          <div class="ct-blog-content">
+            <div class="ct-blog-date">
+              <span>May</span><strong>23</strong>
+            </div>
+            <h3 class="ct-blog-header">
+              Sonu Sood to set up oxygen plants at Kurnool and Nellore hospitals in June
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="ct-blog col-sm-6 col-md-4">
+        <div class="inner">
+          <div class="fauxcrop">
+            <a href="#"><img alt="News Entry" src="news_2.jpg"></a>
+          </div>
+          <div class="ct-blog-content">
+            <div class="ct-blog-date">
+              <span>May</span><strong>22</strong>
+            </div>
+            <h3 class="ct-blog-header">
+              Army brass frowns as CO writes to Sonu Sood for help with Covid facility equipment
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="ct-blog col-sm-6 col-md-4">
+        <div class="inner">
+          <div class="fauxcrop">
+            <a href="#"><img alt="News Entry" src="news_3.jpg"></a>
+          </div>
+          <div class="ct-blog-content">
+            <div class="ct-blog-date">
+              <span>May</span><strong>8</strong>
+            </div>
+            <h3 class="ct-blog-header">
+              Sonu Sood breaks down over death of COVID positive young girl he had airlifted, says 'Life is genuinely unfair at times'
+
+
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="ct-blog col-sm-6 col-md-4">
+        <div class="inner">
+          <div class="fauxcrop">
+            <a href="#"><img alt="News Entry" src="news_4.jpg"></a>
+          </div>
+          <div class="ct-blog-content">
+            <div class="ct-blog-date">
+              <span>May</span><strong>7</strong>
+            </div>
+            <h3 class="ct-blog-header">
+              Sonu Sood comes to Suresh Raina's rescue as cricketer hunts for oxygen cylinder on Twitter
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="ct-blog col-sm-6 col-md-4">
+        <div class="inner">
+          <div class="fauxcrop">
+            <a href="#"><img alt="News Entry" src="news_5.jpg"></a>
+          </div>
+          <div class="ct-blog-content">
+            <div class="ct-blog-date">
+              <span>May</span><strong>1</strong>
+            </div>
+            <h3 class="ct-blog-header">
+              Sonu Sood remains unstoppable in helping COVID patients, says 'it takes me 11 hrs to find bed in Delhi and 9.5 hrs in UP'
+
+
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="ct-blog col-sm-6 col-md-4">
+        <div class="inner">
+          <div class="fauxcrop">
+            <a href="#"><img alt="News Entry" src="news_6.jpg"></a>
+          </div>
+          <div class="ct-blog-content">
+            <div class="ct-blog-date">
+              <span>Apr</span><strong>17</strong>
+            </div>
+            <h3 class="ct-blog-header">
+              Sonu Sood tests corona positive, assures fans 'I'm always there to solve your problems'
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="extra">
+      <p>     Copyright &#169; SONU SOOD 2021. All Rights Reserved</p>
+</div>
+</html>
